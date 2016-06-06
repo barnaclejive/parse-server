@@ -61,8 +61,10 @@ export class FilesController extends AdaptableController {
         let filename = fileObject['name'];
         if (filename.indexOf('tfss-') === 0) {
           fileObject['url'] = 'http://files.parsetfss.com/' + config.fileKey + '/' + encodeURIComponent(filename);
-        } else {
+        } else if (filename.indexOf("petfetch--") >= 0) {
           fileObject['url'] = this.adapter.getFileLocation(config, filename);
+        } else {
+          fileObject['url'] = 'http://files.parse.com/' + config.fileKey + '/' + encodeURIComponent(filename);
         }
       }
     }
